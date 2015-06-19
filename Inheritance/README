@@ -1,0 +1,27 @@
+This approach try to show a problem related to use Inheritance when you didn't need to.
+
+Author and Book classes extends from Persistable but their behaviour are not related.
+In general, when you want to use an Inheritance approach you need to be really sure that
+all the behaviour of the superclass is needed by the child class. The relation is "Is-a".
+All the superclass' behaviour apply for their child class.
+
+That's much better: there is no more code duplication. A bug in one of the Persistable
+methods only needs to be fixed once, and this behavior class can be further reused with
+only two words (extends Persistable).
+
+Except that's an abuse of the inheritance concept. From the business point of view, a
+Book is not a Persistable. It's a Publication, or a StoreItem. It has a persistable
+ability, but that's not the same verb. In fact, the Book class needs to reuse an
+ability that is not specific to its parent. That's called "horizontal code reuse",
+as opposed to the "vertical code reuse" of inheritance.
+
+And to better distinguish the two types of reuse, a good rule of thumb is that a class
+often needs several horizontal reuses, while it can only have at most one vertical
+reuse. For instance, the Book class needs to be persistable, but it also needs to be
+sellable (so it must have a price), storable (so it must have a stock quantity), etc.
+But inheritance only accepts one parent (at least in PHP), so you'll have to choose one.
+
+There is a pattern here: every time you create a class with a name ending with '-able',
+that's an ability, or "behavior" class, and that's a class that you should not extend.
+Or you won't be able to extend anything else. And a class isn't mostly distinguished
+by what it can do, but by what it is.

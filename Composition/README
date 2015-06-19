@@ -1,0 +1,14 @@
+In PHP, a good workaround for taking the ability of multiple parent objects is
+composition. Transform a "behavior" class into a "service" class, and inject that
+class to all the classes that need it. Now that's clean
+
+All the persistence logic is now encapsulated into one unique class. It's testable,
+it's isolated, and it's easy to reuse. Cherry on the cake, the Book and Author
+classes are Plain Old PHP Objects (or POPO) again, meaning they don't extend anything.
+Unit test gurus advocate that everything should be POPO, and despise inheritance,
+so that is probably a good thing.
+
+Notice that the end user isn't allowed to chain method calls and has no knowledge
+of the actual persistence layer. She manipulates the Book::persist() and the
+Book::restore() proxy methods, and there is no public way to access the persistence
+layer. That's following the "Principle of Least Knowledge", also called "Law of Demeter".

@@ -1,0 +1,5 @@
+Traits is the ideal solution in this case because let you get some functionality of a class
+without following a rigid path as with Inheritance. You just get the methods you want to use.
+
+These classes behave like a "Has-a" instead of "Is-a" approach watched with Inheritance.
+
